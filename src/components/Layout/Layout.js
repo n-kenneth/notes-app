@@ -26,7 +26,7 @@ const GlobalStyles = createGlobalStyle`
 `;
 
 const Container = styled.main`
-  max-width: 860px;
+  max-width: 824px;
   margin: 64px auto;
 `;
 

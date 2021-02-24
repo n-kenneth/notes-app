@@ -1,6 +1,3 @@
-import { useContext } from "react";
-import { PopupContext } from "../../context/Popup";
-
 import styled from "styled-components";
 
 const PopupContainer = styled.div`
@@ -41,16 +38,14 @@ const Backdrop = styled.div`
   display: ${(props) => (props.show ? "block" : "none")};
 `;
 
-const Popup = ({ children, title }) => {
-  const [popupState, setPopupState] = useContext(PopupContext);
-
+const Popup = ({ children, title, show }) => {
   return (
     <>
-      <PopupContainer show={popupState}>
+      <PopupContainer show={show}>
         <Title>{title}</Title>
         <PopupBody>{children}</PopupBody>
       </PopupContainer>
-      <Backdrop show={popupState} />
+      <Backdrop show={show} />
     </>
   );
 };

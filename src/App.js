@@ -8,7 +8,9 @@ import styled from "styled-components";
 import NotFound from "./components/NotFound/NotFound";
 import AddNote from "./components/AddNote/AddNote";
 import { PopupContext } from "./context/Popup";
+import { NotesContext } from "./context/Notes";
 import { useContext } from "react";
+import CardList from "./components/CardList/CardList";
 
 const FilterLayout = styled.div`
   display: flex;
@@ -19,7 +21,7 @@ const FilterLayout = styled.div`
 
 const App = () => {
   const [popupState, setPopupState] = useContext(PopupContext);
-
+  const [notes] = useContext(NotesContext);
   return (
     <Layout>
       <Search />
@@ -32,10 +34,17 @@ const App = () => {
           onClick={() => setPopupState(true)}
         />
       </FilterLayout>
-      <Popup title="Add Note" show={popupState}>
-        <AddNote />
-      </Popup>
-      <NotFound label="You don't have any notes" type="add" />
+      {popupState && (
+        <Popup title="Add Note" show>
+          <AddNote />
+        </Popup>
+      )}
+
+      {notes.length ? (
+        <CardList />
+      ) : (
+        <NotFound label="You don't have any notes" type="add" />
+      )}
     </Layout>
   );
 };
